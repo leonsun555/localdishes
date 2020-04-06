@@ -1,7 +1,6 @@
 var data = null;
 
 var xhr = new XMLHttpRequest();
-xhr.withCredentials = false;
 
 xhr.addEventListener("readystatechange", function () {
 	if (this.readyState === this.DONE) {
