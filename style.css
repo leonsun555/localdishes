@@ -1,0 +1,14 @@
+#mode-list,#mode-table,#mode-card{
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+} 
+
+/* .page-btn {
+    display: block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 1px solid black;
+} */

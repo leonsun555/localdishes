@@ -1,17 +1,44 @@
 <html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="css/mixin.css" /> -->
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <!-- <script src="js/function.js"></script>     -->
+    <script src="js/foo.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-<head>
-    <meta charset="utf-8">
-    <!-- <meta http-equiv="Access-Control-Allow-Origin" content="*" /> -->
-    <link rel="stylesheet" href="css/mixin.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/function.js"></script>
-    <script src="js/getData.js"></script>
-
-</head>
-
-<body>
-    <div class="sample"></div>
-</body>
-
+  <body>
+    <div class="title">農村地方美食特色小吃料理</div>
+    <div class="container">
+      <div class="content">
+        <div class="content-bar">
+          <div class="area">
+            <div class="city">
+              <select id="city-selection">
+                <option value="">請選擇市區...</option>
+              </select>
+            </div>
+            <div class="town">
+              <select id="town-selection">
+                <option value="">請選擇鄉鎮區...</option>
+              </select>
+            </div>
+          </div>
+          <div class="mode">
+            <div id="mode-list">list</div>
+            <div id="mode-table">table</div>
+            <div id="mode-card">card</div>
+          </div>
+        </div>
+        <div class="section">
+          <ul id="content-list"></ul>
+          <div id="content-card"></div>
+          <table id="content-table"></table>
+        </div>
+        <div id="page"></div>
+      </div>
+      <div class="AD"></div>
+    </div>
+  </body>
 </html>
