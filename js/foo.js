@@ -75,21 +75,22 @@ function preset() {
   citylistGenerate(resData);
   townlistGenerate(dataSearch(resData, "City", selectedCity));
   pagination(resData);
+
   DOMcity.addEventListener("mouseup", function () {
     //重新賦值給selectedCity
     selectedCity = DOMcity.value;
     let options = DOMtown.querySelectorAll("option");
     options.forEach((el) => {
       if (el.value !== "") el.remove();
-    });
-    filterData = dataSearch(resData, "City", selectedCity);
+    });  
+    if(selectedCity === "") {
+      filterData = resData;
+    }else {
+      filterData = dataSearch(resData, "City", selectedCity)
+    }
     townlistGenerate(filterData);
     pagination(filterData);
-    // if (selectedCity === "") {
     displayData();
-    // } else {
-    //   displayData(filterData);
-    // }
   });
 
   DOMtown.addEventListener("mouseup", function () {

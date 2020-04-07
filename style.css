@@ -1,9 +1,84 @@
-#mode-list,#mode-table,#mode-card{
+body {
+    display: inline-block;
+    font-family: sans-serif;
+    background-color: #eeeeee;
+}
+
+h1 {
+    font-size: x-large;
+}
+h2 {
+    font-size: medium;
+}
+
+.title h1 {
+    text-align: center;
+    color: #656862;
+}
+
+
+.content {
+    float: left;
+    width: 75%;
+}
+
+.content-bar {
+    position: relative;
+    height: 5vh;
+    background-color: #fff;
+}
+
+.content-bar .area {
+    position: absolute;
+    width: auto;
+    height: inherit;
+    left: 0%;
+} 
+
+.content-bar .area .city, .town {
+    float: left;
+    height: inherit;
+    margin: 0 0.5vw;
+    padding: 1vh 0;
+}
+
+#city-selection,#town-selection {
+    border: none;
+    /* margin: 5%; */
+    width: inherit;
+    height: 50%;
+    background-color: #eeeeee;
+}
+
+.content-bar .mode {
+    position: absolute;
+    width: auto;
+    height: inherit;
+    right: 0%;
+}
+
+#mode-title, #mode-list, #mode-table, #mode-card {
+    float: left;
+    margin: 1vh 0.5vw;
+}
+
+.AD {
+    float: left;
+    width: 25%;
+}
+
+
+
+
+
+
+
+/* #mode-list,#mode-table,#mode-card{
     width: 20px;
     height: 20px;
     border: 1px solid black;
     cursor: pointer;
-} 
+}  */
 
 /* .page-btn {
     display: block;
