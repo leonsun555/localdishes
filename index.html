@@ -1,49 +1,79 @@
 <html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="css/mixin.css" /> -->
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <!-- <script src="js/function.js"></script>     -->
+    <script src="js/foo.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <!-- <link rel="stylesheet" href="css/mixin.css" /> -->
-  <!-- <link rel="stylesheet" href="./css/style.css"> -->
-  <!-- <script src="js/function.js"></script>     -->
-  <script src="js/foo.js"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  <div class="title">
-    <h1>農村地方美食特色小吃料理</h1>
-  </div>
-  <!-- <div class="container"> -->
-  <div class="content">
-    <div class="content-bar">
-      <div class="area">
-        <div class="city">
-          <select id="city-selection">
-            <option value="">請選擇市區...</option>
-          </select>
-        </div>
-        <div class="town">
-          <select id="town-selection">
-            <option value="">請選擇鄉鎮區...</option>
-            </select>
+  <body>
+    <div class="title">
+      <h1>農村地方美食特色小吃料理</h1>
+    </div>
+    <!-- <div class="container"> -->
+    <div class="content">
+      <div class="content-bar">
+        <div class="center">
+          <div class="area">
+            <div class="city">
+              <select id="city-selection">
+                <option value="">請選擇市區...</option>
+              </select>
+            </div>
+            <div class="town">
+              <select id="town-selection">
+                <option value="">請選擇鄉鎮區...</option>
+              </select>
+            </div>
           </div>
+          <div class="mode">
+            <div id="mode-title">顯示模式：</div>
+            <div id="mode-list" class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg">
+                <g id="g">
+                  <rect ry="1" rx="1" height="6" width="6" y="3" x="3" stroke-width="0" />
+                  <rect ry="1" rx="1" height="6" width="6" y="12" x="3" stroke-width="0" />
+                  <rect ry="1" rx="1" height="6" width="6" y="21" x="3" stroke-width="0" />
+                  <rect ry="1" rx="1" height="6" width="15" y="3" x="12" stroke-width="0" />
+                  <rect ry="1" rx="1" height="6" width="15" y="12" x="12" stroke-width="0" />
+                  <rect ry="1" rx="1" height="6" width="15" y="21" x="12" stroke-width="0" />
+                 </g>
+              </svg>
+            </div>
+            <div id="mode-table" class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg">
+                <g id="g">
+                  <rect ry="0.5" rx="0.5" height="1" width="24" y="3" x="3" stroke-width="0" />
+                  <rect ry="0.5" rx="0.5" height="1" width="24" y="18.34" x="3" stroke-width="0" />
+                  <rect ry="0.5" rx="0.5" height="1" width="24" y="10.67" x="3" stroke-width="0" />
+                  <rect ry="0.5" rx="0.5" height="1" width="24" y="26" x="3" stroke-width="0" />
+                 </g>
+              </svg>
+            </div>
+            <div id="mode-card" class="btn">
+              <svg xmlns="http://www.w3.org/2000/svg">
+                <g id="g">
+                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="3" x="3" stroke-width="0" />
+                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="16.5" x="3" stroke-width="0" />
+                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="3" x="16.5" stroke-width="0" />
+                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="16.5" x="16.5" stroke-width="0" />
+                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="11.202394" x="75.274658" stroke-width="0" />
+                 </g>
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mode">
-        <div id="mode-title">顯示模式：</div>
-        <div id="mode-list">list</div>
-        <div id="mode-table">table</div>
-        <div id="mode-card">card</div>
+      <div class="section">
+        <ul id="content-list"></ul>
+        <div id="content-card"></div>
+        <table id="content-table"></table>
       </div>
+      <div id="page"></div>
     </div>
-    <div class="section">
-      <ul id="content-list"></ul>
-      <div id="content-card"></div>
-      <table id="content-table"></table>
-    </div>
-    <div id="page"></div>
-  </div>
-  <div class="AD"></div>
-  <!-- </div> -->
-</body>
-
+    <div class="AD"></div>
+    <!-- </div> -->
+  </body>
 </html>

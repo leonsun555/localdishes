@@ -77,24 +77,23 @@ function preset() {
   pagination(resData);
 
   DOMcity.addEventListener("mouseup", function () {
-    //重新賦值給selectedCity
     selectedCity = DOMcity.value;
     let options = DOMtown.querySelectorAll("option");
     options.forEach((el) => {
       if (el.value !== "") el.remove();
-    });  
-    if(selectedCity === "") {
+    });
+    if (selectedCity === "") {
       filterData = resData;
-    }else {
-      filterData = dataSearch(resData, "City", selectedCity)
+    } else {
+      filterData = dataSearch(resData, "City", selectedCity);
+      townlistGenerate(filterData);
     }
-    townlistGenerate(filterData);
     pagination(filterData);
     displayData();
   });
 
   DOMtown.addEventListener("mouseup", function () {
-    //重新賦值給selectedTown
+    if (selectedCity === "") return;
     selectedTown = DOMtown.value;
     if (selectedTown === "") {
       filterData = dataSearch(resData, "City", selectedCity);
@@ -105,7 +104,7 @@ function preset() {
       });
     }
     pagination(filterData);
-    displayData(filterData);
+    displayData();
   });
 
   DOMmodeList.addEventListener("mouseup", function () {
@@ -148,14 +147,30 @@ function liMode(element) {
   liContent.className = "li-content";
   let city = liPrefix.appendChild(document.createElement("div"));
   let town = liPrefix.appendChild(document.createElement("div"));
-  let img = liContent.appendChild(document.createElement("img"));
-  let title = liContent.appendChild(document.createElement("h2"));
-  let description = liContent.appendChild(document.createElement("p"));
+  let imgContainer = liContent.appendChild(document.createElement("div"));
+  imgContainer.className = "img-container";
+  let overlay = imgContainer.appendChild(document.createElement("div"));
+  overlay.className = "img-overlay";
+  let img = imgContainer.appendChild(document.createElement("img"));
+  let context = liContent.appendChild(document.createElement("div"));
+  context.className = "li-content-context";
+  let url = context.appendChild(document.createElement("a"));
+  let title = url.appendChild(document.createElement("h1"));
+  let description = context.appendChild(document.createElement("p"));
   city.innerHTML = element.City;
   town.innerHTML = element.Town;
   img.src = element.PicURL;
   title.innerHTML = element.Name;
-  description.innerHTML = element.HostWords;
+  if (element.Url !== "") {
+    url.href = element.Url;
+  } else {
+    url.href = "#";
+  }
+  if (element.HostWords.length > 130) {
+    description.innerHTML = textCut(element.HostWords, 130);
+  } else {
+    description.innerHTML = element.HostWords;
+  }
 }
 
 function cardMode(element) {
@@ -173,11 +188,12 @@ function cardMode(element) {
 function tableMode(element) {
   let elKeys = Object.keys(element);
   //首次產生Table需額外生成thead
-  if (!DOMcontentTable.getElementsByTagName("tr")) {
+  if (DOMcontentTable.querySelectorAll("tr").length === 0) {
     let tHead = DOMcontentTable.appendChild(document.createElement("tr"));
     tHead.className = "t-head";
     elKeys.forEach((key) => {
-      let tdh = tHead.appendChild(document.createElement("td"));
+      let tdh = tHead.appendChild(document.createElement("th"));
+      console.log(key);
       tdh.innerHTML = key;
     });
   }
@@ -185,8 +201,24 @@ function tableMode(element) {
   tRow.className = "t-row";
   elKeys.forEach((key) => {
     let tdr = tRow.appendChild(document.createElement("td"));
-    tdr.innerHTML = element[key];
+    if(key === "地址") {
+      let a = tdr.appendChild(document.createElement("a"));
+      if(element[key].length > 30) {
+        a.title = element[key];
+        a.innerHTML = textCut(element[key], 30);  
+      }else {
+        a.innerHTML = element[key];
+      }
+    }else {
+      tdr.innerHTML = element[key];
+    }
   });
+}
+
+function textCut(text, length) {
+  console.log(length);
+  console.log(typeof(text.slice(0, length)));
+  return text.slice(0,length) + "...";
 }
 
 function modeChange(mode) {
@@ -195,22 +227,46 @@ function modeChange(mode) {
       DOMcontentList.style.display = "block";
       DOMcontentCard.style.display = "none";
       DOMcontentTable.style.display = "none";
+      modeBtnStyleChange(
+        DOMmodeList.querySelector("g"),
+        DOMmodeCard.querySelector("g"),
+        DOMmodeTable.querySelector("g")
+      );
       break;
     case "card":
       DOMcontentList.style.display = "none";
       DOMcontentCard.style.display = "block";
       DOMcontentTable.style.display = "none";
+      modeBtnStyleChange(
+        DOMmodeCard.querySelector("g"),
+        DOMmodeList.querySelector("g"),
+        DOMmodeTable.querySelector("g")
+      );
       break;
     case "table":
       DOMcontentList.style.display = "none";
       DOMcontentCard.style.display = "none";
-      DOMcontentTable.style.display = "block";
+      DOMcontentTable.style.display = "table";
+      modeBtnStyleChange(
+        DOMmodeTable.querySelector("g"),
+        DOMmodeCard.querySelector("g"),
+        DOMmodeList.querySelector("g")
+      );
       break;
     default:
-      DOMcontentList.style.display = "block";
-      DOMcontentCard.style.display = "none";
-      DOMcontentTable.style.display = "none";
       break;
+  }
+
+  function modeBtnStyleChange(target, other1, other2) {
+    target.querySelectorAll("rect").forEach((el) => {
+      el.style.cssText = "fill: #black";
+    });
+    other1.querySelectorAll("rect").forEach((el) => {
+      el.style.cssText = "fill: #7f7f7f";
+    });
+    other2.querySelectorAll("rect").forEach((el) => {
+      el.style.cssText = "fill: #7f7f7f";
+    });
   }
 }
 
@@ -271,7 +327,7 @@ function pagination(data) {
   let pageToRemove = DOMpage.querySelectorAll("div");
   pageToRemove.forEach((el) => {
     el.remove();
-  })
+  });
   let size = pageProps.pageSize;
   let counter = 1;
   pagedData = Array.apply(null, {
@@ -282,16 +338,17 @@ function pagination(data) {
   pageProps.length = pagedData.length;
   pageProps.selected = 1;
   pageProps.payload = pagedData[pageProps.selected - 1];
-  while(counter <= pageProps.length) {
+  while (counter <= pageProps.length) {
     let pageBtn = DOMpage.appendChild(document.createElement("div"));
     pageBtn.className = "page-btn";
-    pageBtn.style.cssText = "float:left;width: 20px;height: 20px;cursor: pointer;border: 1px solid black;";
+    pageBtn.style.cssText =
+      "float:left;width: 20px;height: 20px;cursor: pointer;border: 1px solid black;";
     pageBtn.innerHTML = counter;
-    pageBtn.addEventListener("mouseup", function() {
+    pageBtn.addEventListener("mouseup", function () {
       pageProps.selected = pageBtn.innerHTML;
       pageProps.payload = pagedData[pageProps.selected - 1];
       displayData();
-    })
+    });
     counter = counter + 1;
   }
 }
