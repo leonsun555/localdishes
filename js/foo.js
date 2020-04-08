@@ -163,6 +163,7 @@ function liMode(element) {
   title.innerHTML = element.Name;
   if (element.Url !== "") {
     url.href = element.Url;
+    url.target = "_blank";
   } else {
     url.href = "#";
   }
