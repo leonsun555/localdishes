@@ -22,7 +22,6 @@ a {
 ul {
   width: 100%;
   height: auto;
-  /* margin: 1rem 0; */
   padding: 0;
   list-style: none;
 }
@@ -206,8 +205,6 @@ table tr td {
 #content-list .li-content .img-container .img-overlay,
 #content-list .li-content .img-container img {
   position: absolute;
-  /* left: 0%;
-    top: 0%; */
   width: 100%;
   height: 100%;
 }

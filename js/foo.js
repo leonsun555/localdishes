@@ -186,7 +186,6 @@ function cardMode(element) {
   city.innerHTML = element.City;
   town.innerHTML = element.Town;
   description.innerHTML = textCut(element.HostWords, 50);
-  // description.innerHTML = element.HostWords;
 }
 
 function tableMode(element) {
@@ -279,7 +278,6 @@ function townlistGenerate(data) {
   });
   townList = distinct(townList);
   DOMtown = insertOption("town-selection", townList);
-  // selectedTown = DOMtown.value;
 }
 
 function citylistGenerate(data) {
@@ -289,7 +287,6 @@ function citylistGenerate(data) {
   });
   cityList = distinct(cityList);
   DOMcity = insertOption("city-selection", cityList);
-  // selectedCity = DOMcity.value;
 }
 
 function insertOption(nodeId, content) {
@@ -299,7 +296,6 @@ function insertOption(nodeId, content) {
     option.value = el;
     option.innerHTML = el;
   });
-  // element.value = element.getElementsByTagName("option")[0].value;
   return element;
 }
 
