@@ -1,14 +1,22 @@
 <html lang="zh">
   <head>
     <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"
+    />
     <!-- <link rel="stylesheet" href="css/mixin.css" /> -->
     <!-- <link rel="stylesheet" href="./css/style.css"> -->
     <!-- <script src="js/function.js"></script>     -->
     <script src="js/foo.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body>
+    <div id="loading">
+      <img src="img/spinner.svg">
+      <p>資料下載中...請稍後!</p>
+    </div>
     <div class="title">
       <h1>農村地方美食特色小吃料理</h1>
     </div>
@@ -19,7 +27,7 @@
           <div class="area">
             <div class="city">
               <select id="city-selection">
-                <option value="">請選擇市區...</option>
+                <option value="">請選擇行政區域...</option>
               </select>
             </div>
             <div class="town">
@@ -33,34 +41,154 @@
             <div id="mode-list" class="btn">
               <svg xmlns="http://www.w3.org/2000/svg">
                 <g id="g">
-                  <rect ry="1" rx="1" height="6" width="6" y="3" x="3" stroke-width="0" />
-                  <rect ry="1" rx="1" height="6" width="6" y="12" x="3" stroke-width="0" />
-                  <rect ry="1" rx="1" height="6" width="6" y="21" x="3" stroke-width="0" />
-                  <rect ry="1" rx="1" height="6" width="15" y="3" x="12" stroke-width="0" />
-                  <rect ry="1" rx="1" height="6" width="15" y="12" x="12" stroke-width="0" />
-                  <rect ry="1" rx="1" height="6" width="15" y="21" x="12" stroke-width="0" />
-                 </g>
+                  <rect
+                    ry="1"
+                    rx="1"
+                    height="6"
+                    width="6"
+                    y="3"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="1"
+                    rx="1"
+                    height="6"
+                    width="6"
+                    y="12"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="1"
+                    rx="1"
+                    height="6"
+                    width="6"
+                    y="21"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="1"
+                    rx="1"
+                    height="6"
+                    width="15"
+                    y="3"
+                    x="12"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="1"
+                    rx="1"
+                    height="6"
+                    width="15"
+                    y="12"
+                    x="12"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="1"
+                    rx="1"
+                    height="6"
+                    width="15"
+                    y="21"
+                    x="12"
+                    stroke-width="0"
+                  />
+                </g>
               </svg>
             </div>
             <div id="mode-table" class="btn">
               <svg xmlns="http://www.w3.org/2000/svg">
                 <g id="g">
-                  <rect ry="0.5" rx="0.5" height="1" width="24" y="3" x="3" stroke-width="0" />
-                  <rect ry="0.5" rx="0.5" height="1" width="24" y="18.34" x="3" stroke-width="0" />
-                  <rect ry="0.5" rx="0.5" height="1" width="24" y="10.67" x="3" stroke-width="0" />
-                  <rect ry="0.5" rx="0.5" height="1" width="24" y="26" x="3" stroke-width="0" />
-                 </g>
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="2"
+                    width="24"
+                    y="3"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="2"
+                    width="24"
+                    y="18.34"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="2"
+                    width="24"
+                    y="10.67"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="2"
+                    width="24"
+                    y="26"
+                    x="3"
+                    stroke-width="0"
+                  />
+                </g>
               </svg>
             </div>
             <div id="mode-card" class="btn">
               <svg xmlns="http://www.w3.org/2000/svg">
                 <g id="g">
-                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="3" x="3" stroke-width="0" />
-                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="16.5" x="3" stroke-width="0" />
-                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="3" x="16.5" stroke-width="0" />
-                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="16.5" x="16.5" stroke-width="0" />
-                  <rect ry="0.5" rx="0.5" height="10.5" width="10.5" y="11.202394" x="75.274658" stroke-width="0" />
-                 </g>
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="10.5"
+                    width="10.5"
+                    y="3"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="10.5"
+                    width="10.5"
+                    y="16.5"
+                    x="3"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="10.5"
+                    width="10.5"
+                    y="3"
+                    x="16.5"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="10.5"
+                    width="10.5"
+                    y="16.5"
+                    x="16.5"
+                    stroke-width="0"
+                  />
+                  <rect
+                    ry="0.5"
+                    rx="0.5"
+                    height="10.5"
+                    width="10.5"
+                    y="11.202394"
+                    x="75.274658"
+                    stroke-width="0"
+                  />
+                </g>
               </svg>
             </div>
           </div>
@@ -68,10 +196,12 @@
       </div>
       <div class="section">
         <ul id="content-list"></ul>
+        <div class="table-container">
+          <table id="content-table"></table>
+        </div>
         <div id="content-card"></div>
-        <table id="content-table"></table>
       </div>
-      <div id="page"></div>
+      <div class="page"></div>
     </div>
     <div class="AD"></div>
     <!-- </div> -->
