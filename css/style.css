@@ -2,8 +2,8 @@ body {
   display: inline-block;
   font-family: sans-serif;
   background-color: #eeeeee;
-  width: 95%;
-  margin: 15px;
+  width: 100%;
+  /* padding: 1%; */
 }
 
 h1 {
@@ -116,7 +116,7 @@ table tr td {
 
 .content {
   float: left;
-  width: 85%;
+  width: 78%;
 }
 
 .content-bar {
@@ -467,9 +467,33 @@ table tr td {
 
 .AD {
   float: left;
-  width: 15%;
+  margin-left: 2%;
+  /* width: 18%; */
 }
 
+.AD * {
+  width: 18vw;
+  height: 60vh;
+  margin-bottom: 1vh;
+}
+
+.AD #block1 {
+  background-color: red;
+}
+
+.AD #block2 {
+  background-color: royalblue;
+}
+
+.AD #block3 {
+  background-color: seagreen;
+}
+
+.AD .ad-fixed {
+  position: fixed;
+  top: 0%;
+  left: calc(80% + 8px);
+}
 /* RWD */
 
 /* iphone 6/7/8 plus */

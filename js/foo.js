@@ -62,7 +62,22 @@ window.onload = function () {
 
   //預設清單顯示模式
   modeChange("list");
-};
+};  
+
+//window滾動事件
+window.onscroll = function () {
+  let adblock2 = document.getElementById("block2");
+  let adblock3 = document.getElementById("block3");
+  //取得第2個廣告的偏移位置
+  let offset2   = adblock2.getBoundingClientRect().bottom;
+
+  //控制第3個廣告的class
+  if(offset2 <= 0) {
+    adblock3.className = "ad-fixed";
+  }else {
+    adblock3.className = "";
+  }
+}
 
 function preset() {
   DOMloading.style.display = "none";
