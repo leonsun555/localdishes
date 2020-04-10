@@ -1,7 +1,7 @@
 "use strict";
 
 const API_URL =
-  "http://http://34.80.92.65:3356/getData";
+  "http://34.80.92.65:3356/getData";
 
 var resData = null;
 var filterData = null;
