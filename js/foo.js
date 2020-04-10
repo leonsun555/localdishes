@@ -1,7 +1,7 @@
 "use strict";
 
-const API_URL =
-  "http://34.80.92.65:3356/getData";
+const API_URL = "http://34.80.92.65:3356/getData";
+const PAGE_SIZE = 10;
 
 var resData = null;
 var filterData = null;
@@ -16,14 +16,11 @@ var DOMloading,
   DOMmodeCard,
   DOMmodeTable,
   DOMpage;
-var cityList = [];
-var townList = [];
 var selectedCity = "";
 var selectedTown = "";
 var pageProps = {
   length: 0,
   selected: 0,
-  pageSize: 10,
   payload: [],
 };
 
@@ -32,15 +29,15 @@ window.onload = function () {
 
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === this.DONE) {
+      //抓取到的資料解析後存至全域變數 => resData
       resData = JSON.parse(this.responseText);
-      console.log(resData);
       preset();
       displayData();
     }
   });
 
   if (typeof XDomainRequest != "undefined") {
-    //IE特別版
+    //IE專用
     xhr = new XDomainRequest();
     xhr.open(method, API_URL);
   } else {
@@ -51,7 +48,7 @@ window.onload = function () {
     xhr.send();
   }, 2000);
 
-  //建立可能會用到的DOM
+  //將所有會頻繁操作的DOM存成全域變數
   DOMloading = document.getElementById("loading");
   DOMcity = document.getElementById("city-selection");
   DOMtown = document.getElementById("town-selection");
@@ -62,6 +59,8 @@ window.onload = function () {
   DOMmodeCard = document.getElementById("mode-card");
   DOMmodeTable = document.getElementById("mode-table");
   DOMpage = document.getElementsByClassName("page")[0];
+
+  //預設清單顯示模式
   modeChange("list");
 };
 
@@ -71,6 +70,7 @@ function preset() {
   townlistGenerate(dataSearch(resData, "City", selectedCity));
   pagination(resData);
 
+  //行政區域選擇dropdown點擊事件
   DOMcity.addEventListener("click", function () {
     selectedCity = DOMcity.value;
     let options = DOMtown.querySelectorAll("option");
@@ -87,6 +87,7 @@ function preset() {
     displayData();
   });
 
+  //鄉鎮選擇dropdown點擊事件
   DOMtown.addEventListener("click", function () {
     if (selectedCity === "") return;
     selectedTown = DOMtown.value;
@@ -102,6 +103,7 @@ function preset() {
     displayData();
   });
 
+  //模式選擇點擊事件
   DOMmodeList.addEventListener("click", function () {
     modeChange("list");
   });
@@ -113,6 +115,7 @@ function preset() {
   });
 }
 
+//資料顯示邏輯
 function displayData() {
   let data = pageProps.payload;
   DOMcontentList.textContent = "";
@@ -120,7 +123,7 @@ function displayData() {
   DOMcontentTable.textContent = "";
 
   data.forEach((el, index) => {
-    //Table專用資料
+    //Table專用資料欄位
     let elForTable = {
       編號: index + 1,
       行政區域: el.City,
@@ -134,6 +137,7 @@ function displayData() {
   });
 }
 
+//清單模式產出DOM element
 function liMode(element) {
   let li = DOMcontentList.appendChild(document.createElement("li"));
   let liPrefix = li.appendChild(document.createElement("div"));
@@ -162,6 +166,8 @@ function liMode(element) {
   } else {
     url.href = "#";
   }
+
+  //敘述字數長度過長截斷(約3行)
   if (element.HostWords.length > 130) {
     description.innerHTML = textCut(element.HostWords, 100);
   } else {
@@ -169,6 +175,7 @@ function liMode(element) {
   }
 }
 
+//卡片模式產出DOM element
 function cardMode(element) {
   let context = DOMcontentCard.appendChild(document.createElement("div"));
   context.className = "context";
@@ -194,12 +201,16 @@ function cardMode(element) {
   name.innerHTML = element.Name;
   city.innerHTML = element.City;
   town.innerHTML = element.Town;
+  //敘述長度過長截斷(約2行)
   description.innerHTML = textCut(element.HostWords, 50);
 }
 
+//表格模式產出DOM element
 function tableMode(element) {
+  //取得所有傳入的key
   let elKeys = Object.keys(element);
-  //首次產生Table需額外生成thead
+
+  //首次產生Table需額外生成thead row
   if (DOMcontentTable.querySelectorAll("tr").length === 0) {
     let tHead = DOMcontentTable.appendChild(document.createElement("tr"));
     tHead.className = "t-head";
@@ -209,6 +220,7 @@ function tableMode(element) {
       tdh.innerHTML = key;
     });
   }
+
   let tRow = DOMcontentTable.appendChild(document.createElement("tr"));
   tRow.className = "t-row";
   elKeys.forEach((key, index) => {
@@ -232,7 +244,7 @@ function modeChange(mode) {
   DOMpage.className = DOMpage.className.replace(" page-list", "");
   switch (mode) {
     case "list":
-      //list加入特別class
+      //list加入特別class(page element長度不同)
       DOMpage.className += " page-list";
       DOMcontentList.style.cssText = "display:block;";
       DOMcontentCard.style.cssText = "display:none !important;";
@@ -267,6 +279,7 @@ function modeChange(mode) {
       break;
   }
 
+  //選擇模式svg顏色切換
   function modeBtnStyleChange(target, other1, other2) {
     target.querySelectorAll("rect").forEach((el) => {
       el.style.cssText = "fill: #black";
@@ -280,8 +293,20 @@ function modeChange(mode) {
   }
 }
 
+function citylistGenerate(data) {
+  let cityList = [];
+  //City欄位資料取出
+  data.forEach((el) => {
+    cityList.push(el.City);
+  });
+  //篩出不重複資料
+  cityList = distinct(cityList);
+  //插入選項
+  DOMcity = insertOption("city-selection", cityList);
+}
+
 function townlistGenerate(data) {
-  townList = [];
+  let townList = [];
   data.forEach((el) => {
     townList.push(el.Town);
   });
@@ -289,15 +314,7 @@ function townlistGenerate(data) {
   DOMtown = insertOption("town-selection", townList);
 }
 
-function citylistGenerate(data) {
-  cityList = [];
-  data.forEach((el) => {
-    cityList.push(el.City);
-  });
-  cityList = distinct(cityList);
-  DOMcity = insertOption("city-selection", cityList);
-}
-
+//選項插入
 function insertOption(nodeId, content) {
   let element = document.getElementById(nodeId);
   content.forEach((el) => {
@@ -308,7 +325,9 @@ function insertOption(nodeId, content) {
   return element;
 }
 
+//資料查詢
 function dataSearch(data, colume, keys) {
+  //如果沒有查詢資料欄位,以City and Town欄位為條件查詢
   if (colume === null) {
     return data.filter((el) => {
       return el.City === keys.city && el.Town === keys.town;
@@ -321,8 +340,10 @@ function dataSearch(data, colume, keys) {
 }
 
 function distinct(arr) {
+  //定義比對array
   let arrDistinct = [];
   for (let i = 0; i < arr.length; i++) {
+    //判斷比對array是否有重複資料,沒有的話再push in
     if (!arrDistinct.includes(arr[i])) {
       arrDistinct.push(arr[i]);
     }
@@ -330,18 +351,16 @@ function distinct(arr) {
   return arrDistinct;
 }
 
+//分頁邏輯及DOM element產出
 function pagination(data) {
   let pageToRemove = DOMpage.querySelectorAll("div");
   pageToRemove.forEach((el) => {
     el.remove();
   });
-  let size = pageProps.pageSize;
   let counter = 1;
-  pagedData = Array.apply(null, {
-    length: Math.ceil(data.length / size),
-  }).map((_, i) => {
-    return data.slice(i * size, (i + 1) * size);
-  });
+
+  //資料分組
+  pagedData = arrayGrouping(data);
   pageProps.length = pagedData.length;
   pageProps.selected = 1;
   pageProps.payload = pagedData[pageProps.selected - 1];
@@ -353,13 +372,17 @@ function pagination(data) {
   let pageBtnGroup = DOMpage.appendChild(document.createElement("div"));
   pageBtnGroup.className = "page-btngroup";
 
+  //產出頁次按鈕DOM element
   while (counter <= pageProps.length) {
     let pageBtn = pageBtnGroup.appendChild(document.createElement("button"));
     pageBtn.className = "page-btn";
-    //預設第一頁為active
+    //active button class預設為第一頁
     if (counter === 1) pageBtn.className += " page-btn-active";
     pageBtn.innerHTML = counter;
+
+    //頁次按鈕點擊事件
     pageBtn.addEventListener("click", function (evt) {
+      //更新選中頁次
       pageProps.selected = evt.target.innerHTML;
       pagePrefix.innerHTML =
         "美食頁次 " + pageProps.selected + "/" + pageProps.length;
@@ -372,8 +395,20 @@ function pagination(data) {
         ""
       );
       evt.target.className += " page-btn-active";
+
+      //DOM element re-rendered
       displayData();
     });
     counter = counter + 1;
   }
+}
+
+function arrayGrouping(data) {
+  //先建立適當長度的array,但不放內容
+  //再將每頁資料分段後map進array
+  return Array.apply(null, {
+    length: Math.ceil(data.length / PAGE_SIZE),
+  }).map((_, i) => {
+    return data.slice(i * PAGE_SIZE, (i + 1) * PAGE_SIZE);
+  });
 }
