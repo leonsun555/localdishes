@@ -422,7 +422,6 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-
     });
 
     //鄉鎮選擇dropdown點擊事件
@@ -439,22 +438,18 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-
     });
 
 
     //模式選擇點擊事件
     DOMmodeList.addEventListener("click", function(evt) {
         modeChange("list");
-
     });
     DOMmodeCard.addEventListener("click", function(evt) {
         modeChange("card");
-
     });
     DOMmodeTable.addEventListener("click", function(evt) {
         modeChange("table");
-
     });
 
     //觸控點擊事件
@@ -472,16 +467,6 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-        console.log("start!!");
-
-    });
-
-    DOMcity.addEventListener("touchmove", function(evt) {
-        console.log("move!!");
-    });
-
-    DOMcity.addEventListener("touchend", function(evt) {
-        console.log("end!!");
     });
 
     DOMtown.addEventListener("touchstart", function(evt) {
@@ -497,19 +482,15 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-
     });
 
     DOMmodeList.addEventListener("touchstart", function(evt) {
         modeChange("list");
-
     });
     DOMmodeCard.addEventListener("touchstart", function(evt) {
         modeChange("card");
-
     });
     DOMmodeTable.addEventListener("touchstart", function(evt) {
         modeChange("table");
-
     });
 }
