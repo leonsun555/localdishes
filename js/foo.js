@@ -393,27 +393,6 @@ function pagination(data) {
             displayData();
 
         });
-
-        pageBtn.addEventListener("touchend", function(evt) {
-            //更新選中頁次
-            pageProps.selected = evt.target.innerHTML;
-            pagePrefix.innerHTML =
-                "美食頁次 " + pageProps.selected + "/" + pageProps.length;
-            pageProps.payload = pagedData[pageProps.selected - 1];
-
-            //active button class 變更
-            let current = document.getElementsByClassName("page-btn-active");
-            current[0].className = current[0].className.replace(
-                " page-btn-active",
-                ""
-            );
-            evt.target.className += " page-btn-active";
-
-            //DOM element re-rendered
-            displayData();
-
-        });
-
     }
 }
 
@@ -429,7 +408,7 @@ function arrayGrouping(data) {
 
 function eventMixin() {
     //行政區域選擇dropdown點擊事件
-    DOMcity.addEventListener("click", function(evt) {
+    DOMcity.addEventListener("change", function(evt) {
         selectedCity = DOMcity.value;
         let options = DOMtown.querySelectorAll("option");
         options.forEach((el) => {
@@ -446,7 +425,7 @@ function eventMixin() {
     });
 
     //鄉鎮選擇dropdown點擊事件
-    DOMtown.addEventListener("click", function(evt) {
+    DOMtown.addEventListener("change", function(evt) {
         if (selectedCity === "") return;
         selectedTown = DOMtown.value;
         if (selectedTown === "") {
@@ -463,96 +442,14 @@ function eventMixin() {
 
 
     //模式選擇點擊事件
-    DOMmodeList.addEventListener("click", function(evt) {
+    DOMmodeList.addEventListener("change", function(evt) {
         modeChange("list");
     });
-    DOMmodeCard.addEventListener("click", function(evt) {
+    DOMmodeCard.addEventListener("change", function(evt) {
         modeChange("card");
     });
-    DOMmodeTable.addEventListener("click", function(evt) {
+    DOMmodeTable.addEventListener("change", function(evt) {
         modeChange("table");
     });
 
-    //觸控點擊事件
-    DOMcity.addEventListener("touchstart", function(evt) {
-        selectedCity = DOMcity.value;
-        let options = DOMtown.querySelectorAll("option");
-        options.forEach((el) => {
-            if (el.value !== "") el.remove();
-        });
-        if (selectedCity === "") {
-            filterData = resData;
-        } else {
-            filterData = dataSearch(resData, "City", selectedCity);
-            townlistGenerate(filterData);
-        }
-        pagination(filterData);
-        displayData();
-    });
-
-    DOMtown.addEventListener("touchstart", function(evt) {
-        if (selectedCity === "") return;
-        selectedTown = DOMtown.value;
-        if (selectedTown === "") {
-            filterData = dataSearch(resData, "City", selectedCity);
-        } else {
-            filterData = dataSearch(resData, null, {
-                city: selectedCity,
-                town: selectedTown,
-            });
-        }
-        pagination(filterData);
-        displayData();
-    });
-
-    DOMmodeList.addEventListener("touchstart", function(evt) {
-        modeChange("list");
-    });
-    DOMmodeCard.addEventListener("touchstart", function(evt) {
-        modeChange("card");
-    });
-    DOMmodeTable.addEventListener("touchstart", function(evt) {
-        modeChange("table");
-    });
-
-    DOMcity.addEventListener("touchend", function(evt) {
-        selectedCity = DOMcity.value;
-        let options = DOMtown.querySelectorAll("option");
-        options.forEach((el) => {
-            if (el.value !== "") el.remove();
-        });
-        if (selectedCity === "") {
-            filterData = resData;
-        } else {
-            filterData = dataSearch(resData, "City", selectedCity);
-            townlistGenerate(filterData);
-        }
-        pagination(filterData);
-        displayData();
-    });
-
-    DOMtown.addEventListener("touchend", function(evt) {
-        if (selectedCity === "") return;
-        selectedTown = DOMtown.value;
-        if (selectedTown === "") {
-            filterData = dataSearch(resData, "City", selectedCity);
-        } else {
-            filterData = dataSearch(resData, null, {
-                city: selectedCity,
-                town: selectedTown,
-            });
-        }
-        pagination(filterData);
-        displayData();
-    });
-
-    DOMmodeList.addEventListener("touchend", function(evt) {
-        modeChange("list");
-    });
-    DOMmodeCard.addEventListener("touchend", function(evt) {
-        modeChange("card");
-    });
-    DOMmodeTable.addEventListener("touchend", function(evt) {
-        modeChange("table");
-    });
 }
