@@ -351,6 +351,7 @@ function pagination(data) {
         //active button class預設為第一頁
         if (counter === 1) pageBtn.className += " page-btn-active";
         pageBtn.innerHTML = counter;
+        counter = counter + 1;
 
         //頁次按鈕點擊事件
         pageBtn.addEventListener("click", function(evt) {
@@ -392,7 +393,27 @@ function pagination(data) {
             displayData();
 
         });
-        counter = counter + 1;
+
+        pageBtn.addEventListener("touchend", function(evt) {
+            //更新選中頁次
+            pageProps.selected = evt.target.innerHTML;
+            pagePrefix.innerHTML =
+                "美食頁次 " + pageProps.selected + "/" + pageProps.length;
+            pageProps.payload = pagedData[pageProps.selected - 1];
+
+            //active button class 變更
+            let current = document.getElementsByClassName("page-btn-active");
+            current[0].className = current[0].className.replace(
+                " page-btn-active",
+                ""
+            );
+            evt.target.className += " page-btn-active";
+
+            //DOM element re-rendered
+            displayData();
+
+        });
+
     }
 }
 
@@ -491,6 +512,47 @@ function eventMixin() {
         modeChange("card");
     });
     DOMmodeTable.addEventListener("touchstart", function(evt) {
+        modeChange("table");
+    });
+
+    DOMcity.addEventListener("touchend", function(evt) {
+        selectedCity = DOMcity.value;
+        let options = DOMtown.querySelectorAll("option");
+        options.forEach((el) => {
+            if (el.value !== "") el.remove();
+        });
+        if (selectedCity === "") {
+            filterData = resData;
+        } else {
+            filterData = dataSearch(resData, "City", selectedCity);
+            townlistGenerate(filterData);
+        }
+        pagination(filterData);
+        displayData();
+    });
+
+    DOMtown.addEventListener("touchend", function(evt) {
+        if (selectedCity === "") return;
+        selectedTown = DOMtown.value;
+        if (selectedTown === "") {
+            filterData = dataSearch(resData, "City", selectedCity);
+        } else {
+            filterData = dataSearch(resData, null, {
+                city: selectedCity,
+                town: selectedTown,
+            });
+        }
+        pagination(filterData);
+        displayData();
+    });
+
+    DOMmodeList.addEventListener("touchend", function(evt) {
+        modeChange("list");
+    });
+    DOMmodeCard.addEventListener("touchend", function(evt) {
+        modeChange("card");
+    });
+    DOMmodeTable.addEventListener("touchend", function(evt) {
         modeChange("table");
     });
 }
