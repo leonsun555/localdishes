@@ -1,9 +1,12 @@
 "use strict";
 
+const API_URL =
+  "http://http://34.80.92.65:3356/getData";
+
 var resData = null;
 var filterData = null;
 var pagedData = null;
-var DOMloading, 
+var DOMloading,
   DOMcity,
   DOMtown,
   DOMcontentList,
@@ -25,22 +28,34 @@ var pageProps = {
 };
 
 window.onload = function () {
-  let xhr = new XMLHttpRequest();
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === this.DONE) {
-      resData = JSON.parse(this.responseText);
+  // let xhr = new XMLHttpRequest();
+  // xhr.addEventListener("readystatechange", function () {
+  //   if (this.readyState === this.DONE) {
+  //     resData = JSON.parse(this.responseText);
+  //     console.log(resData);
+  //     preset();
+  //     displayData();
+  //   }
+  // });
+  // xhr.open(
+  //   "GET",
+  //   "https://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx"
+  // );
+  // setTimeout(() => {
+  //   xhr.send();
+  // }, 2000);
+
+  var cors = createCORSRequest("GET", API_URL);
+  if (!cors) {
+    throw new Error("CORS not supported");
+  }
+
+  cors.onload = function () {
+      resData = JSON.parse(cors.responseText);
       console.log(resData);
       preset();
       displayData();
-    }
-  });
-  xhr.open(
-    "GET",
-    "https://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx"
-  );
-  setTimeout(() => {
-    xhr.send();
-  }, 2000);
+  };
 
   //建立可能會用到的DOM
   DOMloading = document.getElementById("loading");
@@ -55,6 +70,24 @@ window.onload = function () {
   DOMpage = document.getElementsByClassName("page")[0];
   modeChange("list");
 };
+
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // Check if the XMLHttpRequest object has a "withCredentials" property.
+    // "withCredentials" only exists on XMLHTTPRequest2 objects.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // Otherwise, check if XDomainRequest.
+    // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // Otherwise, CORS is not supported by the browser.
+    xhr = null;
+  }
+  return xhr;
+}
 
 function preset() {
   DOMloading.style.display = "none";
