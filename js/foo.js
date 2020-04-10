@@ -71,7 +71,7 @@ function preset() {
   townlistGenerate(dataSearch(resData, "City", selectedCity));
   pagination(resData);
 
-  DOMcity.addEventListener("mouseup", function () {
+  DOMcity.addEventListener("mousedown", function () {
     selectedCity = DOMcity.value;
     let options = DOMtown.querySelectorAll("option");
     options.forEach((el) => {
@@ -87,7 +87,7 @@ function preset() {
     displayData();
   });
 
-  DOMtown.addEventListener("mouseup", function () {
+  DOMtown.addEventListener("mousedown", function () {
     if (selectedCity === "") return;
     selectedTown = DOMtown.value;
     if (selectedTown === "") {
@@ -102,13 +102,13 @@ function preset() {
     displayData();
   });
 
-  DOMmodeList.addEventListener("mouseup", function () {
+  DOMmodeList.addEventListener("mousedown", function () {
     modeChange("list");
   });
-  DOMmodeCard.addEventListener("mouseup", function () {
+  DOMmodeCard.addEventListener("mousedown", function () {
     modeChange("card");
   });
-  DOMmodeTable.addEventListener("mouseup", function () {
+  DOMmodeTable.addEventListener("mousedown", function () {
     modeChange("table");
   });
 }
@@ -359,7 +359,7 @@ function pagination(data) {
     //預設第一頁為active
     if (counter === 1) pageBtn.className += " page-btn-active";
     pageBtn.innerHTML = counter;
-    pageBtn.addEventListener("mouseup", function (evt) {
+    pageBtn.addEventListener("mousedown", function (evt) {
       pageProps.selected = evt.target.innerHTML;
       pagePrefix.innerHTML =
         "美食頁次 " + pageProps.selected + "/" + pageProps.length;
