@@ -84,50 +84,7 @@ function preset() {
     citylistGenerate(resData);
     townlistGenerate(dataSearch(resData, "City", selectedCity));
     pagination(resData);
-
-    //行政區域選擇dropdown點擊事件
-    DOMcity.addEventListener("click touchstart", function() {
-        selectedCity = DOMcity.value;
-        let options = DOMtown.querySelectorAll("option");
-        options.forEach((el) => {
-            if (el.value !== "") el.remove();
-        });
-        if (selectedCity === "") {
-            filterData = resData;
-        } else {
-            filterData = dataSearch(resData, "City", selectedCity);
-            townlistGenerate(filterData);
-        }
-        pagination(filterData);
-        displayData();
-    });
-
-    //鄉鎮選擇dropdown點擊事件
-    DOMtown.addEventListener("click touchstart", function() {
-        if (selectedCity === "") return;
-        selectedTown = DOMtown.value;
-        if (selectedTown === "") {
-            filterData = dataSearch(resData, "City", selectedCity);
-        } else {
-            filterData = dataSearch(resData, null, {
-                city: selectedCity,
-                town: selectedTown,
-            });
-        }
-        pagination(filterData);
-        displayData();
-    });
-
-    //模式選擇點擊事件
-    DOMmodeList.addEventListener("click touchstart", function() {
-        modeChange("list");
-    });
-    DOMmodeCard.addEventListener("click touchstart", function() {
-        modeChange("card");
-    });
-    DOMmodeTable.addEventListener("click touchstart", function() {
-        modeChange("table");
-    });
+    eventMixin();
 }
 
 //資料顯示邏輯
@@ -396,7 +353,7 @@ function pagination(data) {
         pageBtn.innerHTML = counter;
 
         //頁次按鈕點擊事件
-        pageBtn.addEventListener("click touchstart", function(evt) {
+        pageBtn.addEventListener("click", function(evt) {
             //更新選中頁次
             pageProps.selected = evt.target.innerHTML;
             pagePrefix.innerHTML =
@@ -413,6 +370,27 @@ function pagination(data) {
 
             //DOM element re-rendered
             displayData();
+            evt.stopPropagation();
+        });
+
+        pageBtn.addEventListener("touchstart", function(evt) {
+            //更新選中頁次
+            pageProps.selected = evt.target.innerHTML;
+            pagePrefix.innerHTML =
+                "美食頁次 " + pageProps.selected + "/" + pageProps.length;
+            pageProps.payload = pagedData[pageProps.selected - 1];
+
+            //active button class 變更
+            let current = document.getElementsByClassName("page-btn-active");
+            current[0].className = current[0].className.replace(
+                " page-btn-active",
+                ""
+            );
+            evt.target.className += " page-btn-active";
+
+            //DOM element re-rendered
+            displayData();
+            evt.stopPropagation();
         });
         counter = counter + 1;
     }
@@ -425,5 +403,104 @@ function arrayGrouping(data) {
         length: Math.ceil(data.length / PAGE_SIZE),
     }).map((_, i) => {
         return data.slice(i * PAGE_SIZE, (i + 1) * PAGE_SIZE);
+    });
+}
+
+function eventMixin() {
+    //行政區域選擇dropdown點擊事件
+    DOMcity.addEventListener("click", function(evt) {
+        selectedCity = DOMcity.value;
+        let options = DOMtown.querySelectorAll("option");
+        options.forEach((el) => {
+            if (el.value !== "") el.remove();
+        });
+        if (selectedCity === "") {
+            filterData = resData;
+        } else {
+            filterData = dataSearch(resData, "City", selectedCity);
+            townlistGenerate(filterData);
+        }
+        pagination(filterData);
+        displayData();
+        evt.stopPropagation();
+    });
+
+    //鄉鎮選擇dropdown點擊事件
+    DOMtown.addEventListener("click", function(evt) {
+        if (selectedCity === "") return;
+        selectedTown = DOMtown.value;
+        if (selectedTown === "") {
+            filterData = dataSearch(resData, "City", selectedCity);
+        } else {
+            filterData = dataSearch(resData, null, {
+                city: selectedCity,
+                town: selectedTown,
+            });
+        }
+        pagination(filterData);
+        displayData();
+        evt.stopPropagation();
+    });
+
+
+    //模式選擇點擊事件
+    DOMmodeList.addEventListener("click", function(evt) {
+        modeChange("list");
+        evt.stopPropagation();
+    });
+    DOMmodeCard.addEventListener("click", function(evt) {
+        modeChange("card");
+        evt.stopPropagation();
+    });
+    DOMmodeTable.addEventListener("click", function(evt) {
+        modeChange("table");
+        evt.stopPropagation();
+    });
+
+    //觸控點擊事件
+    DOMcity.addEventListener("touchstart", function() {
+        selectedCity = DOMcity.value;
+        let options = DOMtown.querySelectorAll("option");
+        options.forEach((el) => {
+            if (el.value !== "") el.remove();
+        });
+        if (selectedCity === "") {
+            filterData = resData;
+        } else {
+            filterData = dataSearch(resData, "City", selectedCity);
+            townlistGenerate(filterData);
+        }
+        pagination(filterData);
+        displayData();
+        evt.stopPropagation();
+    });
+
+    DOMtown.addEventListener("touchstart", function() {
+        if (selectedCity === "") return;
+        selectedTown = DOMtown.value;
+        if (selectedTown === "") {
+            filterData = dataSearch(resData, "City", selectedCity);
+        } else {
+            filterData = dataSearch(resData, null, {
+                city: selectedCity,
+                town: selectedTown,
+            });
+        }
+        pagination(filterData);
+        displayData();
+        evt.stopPropagation();
+    });
+
+    DOMmodeList.addEventListener("touchstart", function() {
+        modeChange("list");
+        evt.stopPropagation();
+    });
+    DOMmodeCard.addEventListener("touchstart", function() {
+        modeChange("card");
+        evt.stopPropagation();
+    });
+    DOMmodeTable.addEventListener("touchstart", function() {
+        modeChange("table");
+        evt.stopPropagation();
     });
 }
