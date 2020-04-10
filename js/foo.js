@@ -87,7 +87,7 @@ function preset() {
     displayData();
   });
 
-  DOMtown.addEventListener("mousedown", function () {
+  DOMtown.addEventListener("click", function () {
     if (selectedCity === "") return;
     selectedTown = DOMtown.value;
     if (selectedTown === "") {
@@ -102,13 +102,13 @@ function preset() {
     displayData();
   });
 
-  DOMmodeList.addEventListener("mousedown", function () {
+  DOMmodeList.addEventListener("click", function () {
     modeChange("list");
   });
-  DOMmodeCard.addEventListener("mousedown", function () {
+  DOMmodeCard.addEventListener("click", function () {
     modeChange("card");
   });
-  DOMmodeTable.addEventListener("mousedown", function () {
+  DOMmodeTable.addEventListener("click", function () {
     modeChange("table");
   });
 }
@@ -359,7 +359,7 @@ function pagination(data) {
     //預設第一頁為active
     if (counter === 1) pageBtn.className += " page-btn-active";
     pageBtn.innerHTML = counter;
-    pageBtn.addEventListener("mousedown", function (evt) {
+    pageBtn.addEventListener("click", function (evt) {
       pageProps.selected = evt.target.innerHTML;
       pagePrefix.innerHTML =
         "美食頁次 " + pageProps.selected + "/" + pageProps.length;

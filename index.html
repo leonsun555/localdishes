@@ -21,6 +21,7 @@
       var charLast = temp.indexOf(";", charHead);
       var ieVersion = temp.substring(charHead, charLast);
       ieVersion = ieVersion.split(" ")[1];
+      //ie 8 以下強制跳轉到升級瀏覽器頁面
       if (ieVersion <= 8) {
         window.location.href =
           "http://support.dmeng.net/upgrade-your-browser.html?referrer=" +
