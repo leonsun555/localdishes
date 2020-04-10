@@ -71,7 +71,7 @@ function preset() {
   townlistGenerate(dataSearch(resData, "City", selectedCity));
   pagination(resData);
 
-  DOMcity.addEventListener("mousedown", function () {
+  DOMcity.addEventListener("click", function () {
     selectedCity = DOMcity.value;
     let options = DOMtown.querySelectorAll("option");
     options.forEach((el) => {
