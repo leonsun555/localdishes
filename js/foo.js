@@ -370,7 +370,7 @@ function pagination(data) {
 
             //DOM element re-rendered
             displayData();
-            evt.stopPropagation();
+
         });
 
         pageBtn.addEventListener("touchstart", function(evt) {
@@ -390,7 +390,7 @@ function pagination(data) {
 
             //DOM element re-rendered
             displayData();
-            evt.stopPropagation();
+
         });
         counter = counter + 1;
     }
@@ -422,7 +422,7 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-        evt.stopPropagation();
+
     });
 
     //鄉鎮選擇dropdown點擊事件
@@ -439,22 +439,22 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-        evt.stopPropagation();
+
     });
 
 
     //模式選擇點擊事件
     DOMmodeList.addEventListener("click", function(evt) {
         modeChange("list");
-        evt.stopPropagation();
+
     });
     DOMmodeCard.addEventListener("click", function(evt) {
         modeChange("card");
-        evt.stopPropagation();
+
     });
     DOMmodeTable.addEventListener("click", function(evt) {
         modeChange("table");
-        evt.stopPropagation();
+
     });
 
     //觸控點擊事件
@@ -472,7 +472,16 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-        evt.stopPropagation();
+        console.log("start!!");
+
+    });
+
+    DOMcity.addEventListener("touchmove", function(evt) {
+        console.log("move!!");
+    });
+
+    DOMcity.addEventListener("touchend", function(evt) {
+        console.log("end!!");
     });
 
     DOMtown.addEventListener("touchstart", function(evt) {
@@ -488,19 +497,19 @@ function eventMixin() {
         }
         pagination(filterData);
         displayData();
-        evt.stopPropagation();
+
     });
 
     DOMmodeList.addEventListener("touchstart", function(evt) {
         modeChange("list");
-        evt.stopPropagation();
+
     });
     DOMmodeCard.addEventListener("touchstart", function(evt) {
         modeChange("card");
-        evt.stopPropagation();
+
     });
     DOMmodeTable.addEventListener("touchstart", function(evt) {
         modeChange("table");
-        evt.stopPropagation();
+
     });
 }
