@@ -458,7 +458,7 @@ function eventMixin() {
     });
 
     //觸控點擊事件
-    DOMcity.addEventListener("touchstart", function() {
+    DOMcity.addEventListener("touchstart", function(evt) {
         selectedCity = DOMcity.value;
         let options = DOMtown.querySelectorAll("option");
         options.forEach((el) => {
@@ -475,7 +475,7 @@ function eventMixin() {
         evt.stopPropagation();
     });
 
-    DOMtown.addEventListener("touchstart", function() {
+    DOMtown.addEventListener("touchstart", function(evt) {
         if (selectedCity === "") return;
         selectedTown = DOMtown.value;
         if (selectedTown === "") {
@@ -491,15 +491,15 @@ function eventMixin() {
         evt.stopPropagation();
     });
 
-    DOMmodeList.addEventListener("touchstart", function() {
+    DOMmodeList.addEventListener("touchstart", function(evt) {
         modeChange("list");
         evt.stopPropagation();
     });
-    DOMmodeCard.addEventListener("touchstart", function() {
+    DOMmodeCard.addEventListener("touchstart", function(evt) {
         modeChange("card");
         evt.stopPropagation();
     });
-    DOMmodeTable.addEventListener("touchstart", function() {
+    DOMmodeTable.addEventListener("touchstart", function(evt) {
         modeChange("table");
         evt.stopPropagation();
     });

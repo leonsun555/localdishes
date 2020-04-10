@@ -1,65 +1,59 @@
 <html lang="zh">
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"
-    />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
     <meta name="renderer" content="webkit" />
     <meta name="force-rendering" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <title>農村地方美食</title>
-    <link rel="shortcut icon" href="favicon.ico" >
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css?version=51" />
     <script src="js/foo.js"></script>
     <!-- GOOGLE AD -->
-    <script
-      data-ad-client="ca-pub-9152575016490647"
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    ></script>
+    <script data-ad-client="ca-pub-9152575016490647" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
-      var temp = window.navigator.userAgent.toUpperCase();
-      var charHead = temp.indexOf("MSIE");
-      var charLast = temp.indexOf(";", charHead);
-      var ieVersion = temp.substring(charHead, charLast);
-      ieVersion = ieVersion.split(" ")[1];
-      //ie 8 以下強制跳轉到升級瀏覽器頁面
-      if (ieVersion <= 8) {
-        window.location.href =
-          "http://support.dmeng.net/upgrade-your-browser.html?referrer=" +
-          encodeURIComponent(window.location.href);
-      }
+        var temp = window.navigator.userAgent.toUpperCase();
+        var charHead = temp.indexOf("MSIE");
+        var charLast = temp.indexOf(";", charHead);
+        var ieVersion = temp.substring(charHead, charLast);
+        ieVersion = ieVersion.split(" ")[1];
+        //ie 8 以下強制跳轉到升級瀏覽器頁面
+        if (ieVersion <= 8) {
+            window.location.href =
+                "http://support.dmeng.net/upgrade-your-browser.html?referrer=" +
+                encodeURIComponent(window.location.href);
+        }
     </script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div id="loading">
-      <div class="rectRotate"></div>
-      <p>資料下載中...請稍後!</p>
+        <div class="rectRotate"></div>
+        <p>資料下載中...請稍後!</p>
     </div>
     <div class="title">
-      <h1>農村地方美食特色小吃料理</h1>
+        <h1>農村地方美食特色小吃料理</h1>
     </div>
     <div class="content">
-      <div class="content-bar">
-        <div class="center">
-          <div class="area">
-            <div class="city">
-              <select id="city-selection">
+        <div class="content-bar">
+            <div class="center">
+                <div class="area">
+                    <div class="city">
+                        <select id="city-selection">
                 <option value="">請選擇行政區域...</option>
               </select>
-            </div>
-            <div class="town">
-              <select id="town-selection">
+                    </div>
+                    <div class="town">
+                        <select id="town-selection">
                 <option value="">請選擇鄉鎮區...</option>
               </select>
-            </div>
-          </div>
-          <div class="mode">
-            <div id="mode-title">顯示模式：</div>
-            <div id="mode-list" class="btn">
-              <svg xmlns="http://www.w3.org/2000/svg">
+                    </div>
+                </div>
+                <div class="mode">
+                    <div id="mode-title">顯示模式：</div>
+                    <div id="mode-list" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg">
                 <g id="g">
                   <rect
                     ry="1"
@@ -117,9 +111,9 @@
                   />
                 </g>
               </svg>
-            </div>
-            <div id="mode-table" class="btn">
-              <svg xmlns="http://www.w3.org/2000/svg">
+                    </div>
+                    <div id="mode-table" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg">
                 <g id="g">
                   <rect
                     ry="0.5"
@@ -159,9 +153,9 @@
                   />
                 </g>
               </svg>
-            </div>
-            <div id="mode-card" class="btn">
-              <svg xmlns="http://www.w3.org/2000/svg">
+                    </div>
+                    <div id="mode-card" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg">
                 <g id="g">
                   <rect
                     ry="0.5"
@@ -210,23 +204,24 @@
                   />
                 </g>
               </svg>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="section">
-        <ul id="content-list"></ul>
-        <div class="table-container">
-          <table id="content-table"></table>
+        <div class="section">
+            <ul id="content-list"></ul>
+            <div class="table-container">
+                <table id="content-table"></table>
+            </div>
+            <div id="content-card"></div>
         </div>
-        <div id="content-card"></div>
-      </div>
-      <div class="page"></div>
+        <div class="page"></div>
     </div>
     <div class="AD">
-      <div id="block1"></div>
-      <div id="block2"></div>
-      <div id="block3"></div>
+        <div id="block1"></div>
+        <div id="block2"></div>
+        <div id="block3"></div>
     </div>
-  </body>
+</body>
+
 </html>
