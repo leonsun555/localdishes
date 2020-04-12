@@ -373,26 +373,6 @@ function pagination(data) {
             displayData();
 
         });
-
-        pageBtn.addEventListener("touchstart", function(evt) {
-            //更新選中頁次
-            pageProps.selected = evt.target.innerHTML;
-            pagePrefix.innerHTML =
-                "美食頁次 " + pageProps.selected + "/" + pageProps.length;
-            pageProps.payload = pagedData[pageProps.selected - 1];
-
-            //active button class 變更
-            let current = document.getElementsByClassName("page-btn-active");
-            current[0].className = current[0].className.replace(
-                " page-btn-active",
-                ""
-            );
-            evt.target.className += " page-btn-active";
-
-            //DOM element re-rendered
-            displayData();
-
-        });
     }
 }
 
@@ -443,13 +423,13 @@ function eventMixin() {
 
 
     //模式選擇點擊事件
-    DOMmodeList.addEventListener("change", function(evt) {
+    DOMmodeList.addEventListener("click", function(evt) {
         modeChange("list");
     });
-    DOMmodeCard.addEventListener("change", function(evt) {
+    DOMmodeCard.addEventListener("click", function(evt) {
         modeChange("card");
     });
-    DOMmodeTable.addEventListener("change", function(evt) {
+    DOMmodeTable.addEventListener("click", function(evt) {
         modeChange("table");
     });
 
