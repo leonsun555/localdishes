@@ -73,7 +73,7 @@ window.onscroll = function() {
 
     //控制第3個廣告的class
     if (offset2 <= 0) {
-        adblock3.className = "ad-fixed";
+        adblock3.className = "fixed-top";
     } else {
         adblock3.className = "";
     }

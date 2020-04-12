@@ -486,7 +486,7 @@ table tr td {
     background-color: seagreen;
 }
 
-.AD .ad-fixed {
+.AD .fixed-top {
     position: fixed;
     top: 0%;
     left: calc(80% + 8px);
