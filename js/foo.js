@@ -389,7 +389,6 @@ function arrayGrouping(data) {
 function eventMixin() {
     //行政區域選擇dropdown更動事件
     DOMcity.addEventListener("change", function(evt) {
-        // document.getElementById("test1").style.display = "none";
         selectedCity = DOMcity.value;
         let options = DOMtown.querySelectorAll("option");
         options.forEach((el) => {
