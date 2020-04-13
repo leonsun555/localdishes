@@ -387,7 +387,7 @@ function arrayGrouping(data) {
 }
 
 function eventMixin() {
-    //行政區域選擇dropdown點擊事件
+    //行政區域選擇dropdown更動事件
     DOMcity.addEventListener("change", function(evt) {
         // document.getElementById("test1").style.display = "none";
         selectedCity = DOMcity.value;
@@ -405,7 +405,7 @@ function eventMixin() {
         displayData();
     });
 
-    //鄉鎮選擇dropdown點擊事件
+    //鄉鎮選擇dropdown更動事件
     DOMtown.addEventListener("change", function(evt) {
         if (selectedCity === "") return;
         selectedTown = DOMtown.value;
